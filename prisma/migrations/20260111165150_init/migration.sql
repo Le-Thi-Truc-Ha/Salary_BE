@@ -2,7 +2,7 @@
 CREATE TABLE "public"."Account" (
     "id" SERIAL NOT NULL,
     "fullName" TEXT NOT NULL,
-    "userName" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "status" INTEGER,
     "roleId" INTEGER,
@@ -38,7 +38,7 @@ CREATE TABLE "public"."Shift" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Account_userName_key" ON "public"."Account"("userName");
+CREATE UNIQUE INDEX "Account_username_key" ON "public"."Account"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Role_name_key" ON "public"."Role"("name");

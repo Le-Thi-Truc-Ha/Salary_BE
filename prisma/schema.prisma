@@ -10,7 +10,7 @@ datasource db {
 model Account {
   id       Int     @id @default(autoincrement())
   fullName String
-  userName String  @unique
+  username String  @unique
   password String
   status   Int?
   roleId   Int?

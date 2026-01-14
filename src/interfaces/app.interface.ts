@@ -3,9 +3,8 @@ import { PrismaClient } from "@prisma/client";
 export const prisma = new PrismaClient();
 
 export interface SessionValue {
-    id: number,
-    roleId: number,
-    googleLogin: boolean
+    accountId: number,
+    roleId: number
 }
 
 export interface ReturnData {

@@ -11,8 +11,8 @@ export const createSession = async (value: SessionValue): Promise<string> => {
         let sessionKey: string = "";
         const uuid = uuidv4();
         await redis.set(uuid, JSON.stringify(value), "EX", 60*60*24*30);
-        await redis.sadd(`session:${value.id}`, uuid);
-        sessionKey = `${uuid}=${value.id}`;
+        await redis.sadd(`session:${value.accountId}`, uuid);
+        sessionKey = `${uuid}=${value.accountId}`;
         return sessionKey;
     } catch(e) {
         console.log(e);
