@@ -1,6 +1,6 @@
-import { createPassword } from './../../prisma/seed';
 import { compare } from "bcrypt-ts";
 import { prisma, ReturnData } from "../interfaces/app.interface";
+import { createPassword } from "./app.service";
 
 export const getShiftsService = async (accountId: number, month: number, year: number): Promise<ReturnData> => {
     try {

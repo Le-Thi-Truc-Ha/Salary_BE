@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { prisma, ReturnData } from "../interfaces/app.interface";
 import { compare } from "bcrypt-ts";
-import { createPassword } from "../../prisma/seed";
+import { createPassword } from "./app.service";
 
 export const getStateService = async (accountId: number): Promise<ReturnData> => {
     try {

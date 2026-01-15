@@ -1,6 +1,12 @@
-import { compare } from "bcrypt-ts";
+import { compare, genSalt, hash } from "bcrypt-ts";
 import { prisma, ReturnData, SessionValue } from "../interfaces/app.interface";
 import { createSession } from "../middleware/jwt";
+
+export const createPassword = async (password: string): Promise<string> => {
+    const salt = await genSalt(10);
+    const result = await hash(password, salt);
+    return result;
+}
 
 export const loginService = async (username: string, password: string): Promise<ReturnData> => {
     try {
