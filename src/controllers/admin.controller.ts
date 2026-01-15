@@ -2,6 +2,19 @@ import { Request, Response } from "express";
 import { ReturnData } from "../interfaces/app.interface";
 import * as service from "../services/admin.service";
 
+export const awakeBackendController = async (req: Request, res: Response): Promise<any> => {
+    try {
+        console.log("Awake backend");
+        return res.status(200).send("Sucsess");
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({
+            message: "Xảy ra lỗi ở controller",
+            data: false,
+            code: -1
+        })
+    }
+}
 export const getShiftsController = async (req: Request, res: Response): Promise<any> => {
     try {
         const {employeeId, month, year} = req.body;
