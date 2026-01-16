@@ -1,6 +1,7 @@
 import { compare } from "bcrypt-ts";
 import { prisma, ReturnData } from "../interfaces/app.interface";
 import { createPassword } from "./app.service";
+import { deleteAllSession } from "../middleware/jwt";
 
 export const getShiftsService = async (accountId: number, month: number, year: number): Promise<ReturnData> => {
     try {
@@ -242,6 +243,8 @@ export const deleteEmployeeService = async (employeeId: number): Promise<ReturnD
                 }
             })
         })
+
+        await deleteAllSession(employeeId)
 
         return({
             message: "Xóa tài khoản thành công",

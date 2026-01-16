@@ -62,10 +62,8 @@ export const getAllSession = async (sessionKey: string): Promise<SessionValue[]>
     }
 }
 
-export const deleteAllSession = async (sessionKey: string): Promise<void> => {
+export const deleteAllSession = async (accountId: number): Promise<void> => {
     try {
-        const [uuid, accountId] = sessionKey.split("=");
-
         const uuids = await redis.smembers(`session:${accountId}`);
         
         for (const item of uuids) {
