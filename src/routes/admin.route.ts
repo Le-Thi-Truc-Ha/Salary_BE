@@ -6,7 +6,6 @@ let adminRoute = express.Router();
 
 adminRoute.use(checkLogin, checkPermission);
 
-adminRoute.get("/awake-backend", controller.awakeBackendController);
 adminRoute.post("/get-shifts", controller.getShiftsController);
 adminRoute.post("/save-password", controller.savePasswordController);
 adminRoute.get("/get-employee", controller.getEmployeeController);
