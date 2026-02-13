@@ -12,5 +12,6 @@ adminRoute.get("/get-employee", controller.getEmployeeController);
 adminRoute.post("/create-employee", controller.createEmployeeController);
 adminRoute.post("/reset-password", controller.resetPasswordController);
 adminRoute.post("/delete-employee", controller.deleteEmployeeController);
+adminRoute.post("/update-shift", controller.updateShiftController);
 
 export default adminRoute;

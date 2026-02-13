@@ -29,20 +29,20 @@ export const getShiftsService = async (accountId: number, month: number, year: n
         })
         
         let totalHours = 0;
-        for (const shift of shifts) {
-            if (shift.timeIn && shift.timeOut) {
-                const diffMs = shift.timeOut.getTime() - shift.timeIn.getTime();
-                totalHours += diffMs / (1000 * 60 * 60);
-            }
-        }
 
-        const result = shifts.map((item) => (
-            {
+        const result = shifts.map((item) => {
+            let diffMs: number | null = null;
+            if (item.timeIn && item.timeOut) {
+                diffMs = (item.timeOut.getTime() - item.timeIn.getTime()) / (1000 * 60 * 60);
+                totalHours += diffMs;
+            }
+            return ({
                 id: item.id,
                 timeIn: item.timeIn?.toISOString(),
-                timeOut: item.timeOut ? item.timeOut.toISOString() : null
-            }
-        ))
+                timeOut: item.timeOut ? item.timeOut.toISOString() : null,
+                time: diffMs ? (Math.round(diffMs * 100) / 100) : null
+            })
+        })
 
         return({
             message: "Thành công",
@@ -248,6 +248,39 @@ export const deleteEmployeeService = async (employeeId: number): Promise<ReturnD
 
         return({
             message: "Xóa tài khoản thành công",
+            data: true,
+            code: 0
+        })
+    } catch(e) {
+        console.log(e);
+        return({
+            message: "Xảy ra lỗi ở service",
+            data: false,
+            code: -1
+        })
+    }
+}
+
+export const updateShiftService = async (shiftId: number, timeIn: string, timeOut: string | null): Promise<ReturnData> => {
+    try {
+        const updateShift = await prisma.shift.update({
+            where: {
+                id: shiftId
+            },
+            data: {
+                timeIn: timeIn,
+                timeOut: timeOut
+            }
+        })
+        if (!updateShift) {
+            return({
+                message: "Cập nhật ca làm thất bại",
+                data: false,
+                code: 1
+            })
+        }
+        return({
+            message: "Cập nhật ca làm thành công",
             data: true,
             code: 0
         })

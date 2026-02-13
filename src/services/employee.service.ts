@@ -108,20 +108,20 @@ export const getShiftsService = async (accountId: number, month: number, year: n
         })
         
         let totalHours = 0;
-        for (const shift of shifts) {
-            if (shift.timeIn && shift.timeOut) {
-                const diffMs = shift.timeOut.getTime() - shift.timeIn.getTime();
-                totalHours += diffMs / (1000 * 60 * 60);
-            }
-        }
 
-        const result = shifts.map((item) => (
-            {
+        const result = shifts.map((item) => {
+            let diffMs: number | null = null;
+            if (item.timeIn && item.timeOut) {
+                diffMs = (item.timeOut.getTime() - item.timeIn.getTime()) / (1000 * 60 * 60);
+                totalHours += diffMs;
+            }
+            return ({
                 id: item.id,
                 timeIn: item.timeIn?.toISOString(),
-                timeOut: item.timeOut ? item.timeOut.toISOString() : null
-            }
-        ))
+                timeOut: item.timeOut ? item.timeOut.toISOString() : null,
+                time: diffMs ? (Math.round(diffMs * 100) / 100) : null
+            })
+        })
 
         return({
             message: "Thành công",

@@ -150,3 +150,29 @@ export const deleteEmployeeController = async (req: Request, res: Response): Pro
         })
     }
 }
+
+export const updateShiftController = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const {shiftId, timeIn, timeOut} = req.body;
+        if (!shiftId || !timeIn) {
+            return res.status(200).json({
+                message: "Không nhận được dữ liệu",
+                data: false,
+                code: 1
+            })
+        }
+        const result: ReturnData = await service.updateShiftService(shiftId, timeIn, timeOut);
+        return res.status(200).json({
+            message: result.message,
+            data: result.data,
+            code: result.code
+        })
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({
+            message: "Xảy ra lỗi ở controller",
+            data: false,
+            code: -1
+        })
+    }
+}
