@@ -9,7 +9,9 @@ import initWebRoute from "./routes/web.route";
 
 const PORT = process.env.PORT || 3000;
 const app: Application = express();
-app.get("/", (req, res) => res.send("Server is alive"));
+app.get("/", (req, res) => res.status(200).send("Server is alive"));
+app.get("/health", (req, res) => res.send("OK"));
+
 
 // configCors(app);
 
