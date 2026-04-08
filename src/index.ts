@@ -5,18 +5,19 @@ import express, { Application } from "express";
 import configCors from "./configs/cors";
 import initWebRoute from "./routes/web.route";
 
-dotenv.config();
+// dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const app: Application = express();
+app.get("/", (req, res) => res.send("Server is alive"));
 
-configCors(app);
+// configCors(app);
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(cookieParser());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
 
-initWebRoute(app);
+// initWebRoute(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
