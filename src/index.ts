@@ -7,7 +7,7 @@ import initWebRoute from "./routes/web.route";
 
 dotenv.config();
 
-const port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const port: number = parseInt(process.env.PORT, 10);
 const app: Application = express();
 
 configCors(app);
