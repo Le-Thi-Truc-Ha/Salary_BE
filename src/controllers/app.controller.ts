@@ -3,6 +3,19 @@ import { ReturnData, SessionValue } from "../interfaces/app.interface";
 import * as service from "../services/app.service";
 import { deleteOneSession, verifySession } from "../middleware/jwt";
 
+export const rootController = async (req: Request, res: Response): Promise<any> => {
+    try {
+        return res.status(200).send("Server is alive");
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({
+            message: "Xảy ra lỗi ở controller",
+            data: false,
+            code: -1
+        })
+    }
+}
+
 export const awakeBackendController = async (req: Request, res: Response): Promise<any> => {
     try {
         console.log("Awake backend");
