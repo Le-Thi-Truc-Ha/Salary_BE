@@ -7,7 +7,7 @@ import initWebRoute from "./routes/web.route";
 
 dotenv.config();
 
-const port: number = parseInt(process.env.PORT, 10);
+const PORT = process.env.PORT || 3000;
 const app: Application = express();
 
 configCors(app);
@@ -18,6 +18,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 initWebRoute(app);
 
-app.listen(port, () => {
-    console.log("Backend is running on the port: " + port);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
